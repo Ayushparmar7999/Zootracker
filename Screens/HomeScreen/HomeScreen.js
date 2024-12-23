@@ -2,7 +2,7 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, Image } from 'react-native';
 import styles from './HomeScreenstyle';
-const HomeScreen = () => {
+const HomeScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
@@ -13,6 +13,7 @@ const HomeScreen = () => {
       <Text style={styles.titl}>Welcome to Animal Tracker</Text>
       <TouchableOpacity
         style={styles.button}
+        onPress={() => navigation.navigate('AddAnimal')}
       >
         <Text style={styles.buttonText}>Add Animal</Text>
       </TouchableOpacity>

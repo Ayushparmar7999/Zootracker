@@ -26,6 +26,13 @@ const animalSlice = createSlice({
       saveAnimalsToStorage(state.animals); 
     }
   },
+  editAnimal: (state, action) => {
+    const index = state.animals.findIndex((animal) => animal.id === action.payload.id);
+    if (index !== -1) {
+      state.animals[index] = { ...state.animals[index], ...action.payload };
+      saveAnimalsToStorage(state.animals); 
+    }
+  },
 });
 
 const saveAnimalsToStorage = async (animals) => {

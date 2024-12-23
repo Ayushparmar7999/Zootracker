@@ -10,6 +10,7 @@ import store, { persistor } from './Redux/store';
 import { loadAnimalsFromStorage } from './Redux/animalSlice';
 import { PersistGate } from 'redux-persist/integration/react';
 import AnimalListScreen from './Screens/AnimalListScreen/AnimalListScreen';
+import EditAnimalScreen from './Screens/EditAnimalScreen/EditAnimalScreen';
 
 const Stack = createStackNavigator();
 
@@ -47,6 +48,12 @@ const App = () => {
               name="AnimalList"
               component={AnimalListScreen}
               options={{ title: 'Animal List' }}
+            />
+
+<Stack.Screen
+              name="EditAnimal"
+              component={EditAnimalScreen}
+              options={{ title: 'Edit Animal' }}
             />
 
           </Stack.Navigator>

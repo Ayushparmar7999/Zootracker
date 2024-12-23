@@ -5,7 +5,6 @@ import storage from 'redux-persist/lib/storage';
 import { combineReducers } from 'redux';
 import animalReducer from './animalSlice'; 
 
-
 const persistConfig = {
   key: 'root',
   storage,

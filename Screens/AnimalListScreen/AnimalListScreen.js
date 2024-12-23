@@ -6,12 +6,13 @@ import {
   FlatList,
   Image,
   ScrollView,
+  TouchableOpacity,
 } from 'react-native';
 import { useSelector } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import styles from './Animalliststyles';
 
-const AnimalListScreen = () => {
+const AnimalListScreen = ({ route, navigation }) => {
   const animals = useSelector((state) => state.animal.animals);
 
   return (
@@ -35,6 +36,19 @@ const AnimalListScreen = () => {
             <Text style={styles.name}>Name: {item.name}</Text>
             <Text style={styles.breed}>Breed: {item.breed}</Text>
             <Text style={styles.description}>Description: {item.description}</Text>
+
+            <View style={styles.actionContainer}>
+              <TouchableOpacity
+                style={styles.editButton}
+                onPress={() => navigation.navigate('EditAnimal', { animalId: item.id })}
+              >
+                <Icon name="edit" size={20} color="#FFFFFF" />
+                <Text style={styles.editButtonText}>Edit</Text>
+              </TouchableOpacity>
+
+            </View>
+
+
           </View>
         </View>
       )}

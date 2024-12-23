@@ -11,19 +11,32 @@ import {
 import { launchImageLibrary } from 'react-native-image-picker';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import styles from './AddAnimalstyles';
+import { useDispatch } from 'react-redux';
+import { addAnimal } from '../../Redux/animalSlice';
 
-const AddAnimalScreen = () => {
+const AddAnimalScreen = ({ navigation }) => {
   const [name, setName] = useState('');
   const [breed, setBreed] = useState('');
   const [description, setDescription] = useState('');
   const [images, setImages] = useState([]);
-
+  const dispatch = useDispatch();
   const handleAddAnimal = () => {
     if (!name || !breed || !description || images.length === 0) {
-      alert('Please fill all fields');
+      alert('Please fill all fields ');
       return;
     }
+
+    dispatch(
+      addAnimal({
+        name,
+        breed,
+        description,
+        images,
+      })
+    );
+    navigation.navigate('AnimalList');
   };
+
   const pickImages = () => {
     const options = {
       mediaType: 'photo',

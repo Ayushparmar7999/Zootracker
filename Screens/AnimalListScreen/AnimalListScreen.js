@@ -7,13 +7,32 @@ import {
   Image,
   ScrollView,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import styles from './Animalliststyles';
+import { removeAnimal } from '../../Redux/animalSlice';
 
 const AnimalListScreen = ({ route, navigation }) => {
   const animals = useSelector((state) => state.animal.animals);
+  const dispatch = useDispatch();
+
+  const handleRemoveAnimal = (id) => {
+    Alert.alert(
+      'Confirm Deletion',
+      'Are you sure you want to remove this animal?',
+      [
+        { text: 'Cancel', style: 'cancel' },
+        {
+          text: 'Remove',
+          style: 'destructive',
+          onPress: () => dispatch(removeAnimal(id)),
+        },
+      ],
+      { cancelable: true }
+    );
+  };
 
   return (
     <FlatList
@@ -44,6 +63,14 @@ const AnimalListScreen = ({ route, navigation }) => {
               >
                 <Icon name="edit" size={20} color="#FFFFFF" />
                 <Text style={styles.editButtonText}>Edit</Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                style={styles.removeButton}
+                onPress={() => handleRemoveAnimal(item.id)}
+              >
+                <Icon name="delete" size={20} color="#FFFFFF" />
+                <Text style={styles.removeButtonText}>Remove</Text>
               </TouchableOpacity>
 
             </View>

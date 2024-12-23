@@ -31,7 +31,6 @@ const EditAnimalScreen = ({ route, navigation }) => {
       alert('Please fill all fields and upload at least one image!');
       return;
     }
-
     dispatch(editAnimal({ id: animalId, name, breed, description, images }));
     navigation.navigate('AnimalList');
   };

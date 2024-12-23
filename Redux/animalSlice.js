@@ -24,15 +24,20 @@ const animalSlice = createSlice({
       };
       state.animals.push(newAnimal);
       saveAnimalsToStorage(state.animals); 
+    },
+    editAnimal: (state, action) => {
+      const index = state.animals.findIndex((animal) => animal.id === action.payload.id);
+      if (index !== -1) {
+        state.animals[index] = { ...state.animals[index], ...action.payload };
+        saveAnimalsToStorage(state.animals); 
+      }
+    },
+    removeAnimal: (state, action) => {
+      state.animals = state.animals.filter((animal) => animal.id !== action.payload);
+      saveAnimalsToStorage(state.animals); // Save to AsyncStorage
     }
-  },
-  editAnimal: (state, action) => {
-    const index = state.animals.findIndex((animal) => animal.id === action.payload.id);
-    if (index !== -1) {
-      state.animals[index] = { ...state.animals[index], ...action.payload };
-      saveAnimalsToStorage(state.animals); 
-    }
-  },
+  }
+  
 });
 
 const saveAnimalsToStorage = async (animals) => {
@@ -54,5 +59,5 @@ export const loadAnimalsFromStorage = () => async (dispatch) => {
   }
 };
 
-export const { setAnimals, addAnimal } = animalSlice.actions;
+export const { setAnimals, addAnimal,editAnimal,removeAnimal } = animalSlice.actions;
 export default animalSlice.reducer;

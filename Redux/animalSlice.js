@@ -34,7 +34,7 @@ const animalSlice = createSlice({
     },
     removeAnimal: (state, action) => {
       state.animals = state.animals.filter((animal) => animal.id !== action.payload);
-      saveAnimalsToStorage(state.animals); // Save to AsyncStorage
+      saveAnimalsToStorage(state.animals); 
     }
   }
   

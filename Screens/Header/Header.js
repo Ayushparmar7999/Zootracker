@@ -24,6 +24,4 @@ const Header = ({ title }) => {
     </View>
   );
 };
-
-
 export default Header;
